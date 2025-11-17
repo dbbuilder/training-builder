@@ -34,3 +34,4 @@ Thumbs.db
 # UI-specific
 ui/.next/
 ui/.vercel/
+.vercel
