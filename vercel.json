@@ -1,9 +1,7 @@
 {
-  "buildCommand": "cd ui && npm install && npm run build",
-  "outputDirectory": "ui/.next",
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"],
-  "github": {
-    "silent": true
-  }
+  "rootDirectory": "ui"
 }
