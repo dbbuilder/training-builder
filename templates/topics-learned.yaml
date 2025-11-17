@@ -1,0 +1,289 @@
+# Topics Learned Summary Template
+# =================================
+# Structure for generating concise chapter summaries
+
+metadata:
+  target_items: "5-10 key topics"
+  format: "Bulleted list with brief descriptions"
+  purpose: "Quick reference of chapter content"
+
+structure:
+  header:
+    template: |
+      # Chapter {chapter_number} Topics Learned
+
+      **{chapter_title}**
+
+      Quick reference of key concepts covered in this chapter.
+
+  topics_list:
+    format: "Categorized bulleted list"
+    template: |
+      ## Core Concepts
+
+      - **{Topic 1}**: {1-2 sentence description}
+      - **{Topic 2}**: {Description}
+      - **{Topic 3}**: {Description}
+
+      ## Technical Skills
+
+      - **{Skill 1}**: {What you can now do}
+      - **{Skill 2}**: {What you can now do}
+
+      ## Tools & Technologies
+
+      - **{Tool 1}**: {How you used it}
+      - **{Tool 2}**: {How you used it}
+
+      ## Parts-Co Application
+
+      - **{Feature 1}**: {What you built}
+      - **{Feature 2}**: {What you built}
+
+categories:
+  core_concepts:
+    description: "Fundamental ideas and theory"
+    format: "{Concept name}: {Brief explanation}"
+    examples:
+      - "**Type Safety**: Ensuring frontend and backend types match automatically"
+      - "**Server Components**: React components that render on the server"
+      - "**Normalization**: Organizing data to reduce redundancy"
+
+  technical_skills:
+    description: "Practical abilities acquired"
+    format: "{Skill}: {What you can do}"
+    examples:
+      - "**Creating tRPC procedures**: Define type-safe API endpoints"
+      - "**Prisma queries**: Fetch and manipulate database data with TypeScript"
+      - "**Form validation**: Validate user input with Zod schemas"
+
+  tools_technologies:
+    description: "Software and libraries introduced"
+    format: "{Tool/Tech}: {Purpose and usage}"
+    examples:
+      - "**tRPC**: Type-safe RPC framework for client-server communication"
+      - "**Zod**: Runtime schema validation library"
+      - "**Prisma Studio**: GUI for viewing and editing database data"
+
+  parts_co_features:
+    description: "Functionality built in the application"
+    format: "{Feature}: {Description}"
+    examples:
+      - "**Parts catalog API**: tRPC procedures for fetching parts data"
+      - "**Inventory validation**: Check stock before adding to cart"
+      - "**Order creation**: Multi-step transaction for processing orders"
+
+  best_practices:
+    description: "Recommended approaches and patterns"
+    format: "{Practice}: {Why it matters}"
+    examples:
+      - "**Server-first rendering**: Fetch data on server to reduce client JS"
+      - "**Input validation**: Always validate at API boundary with Zod"
+      - "**Error handling**: Use tRPC error codes for type-safe errors"
+
+topic_format:
+  structure: "**{Bold topic name}**: {Description}"
+  description_length: "1-2 sentences (20-40 words)"
+
+  guidelines:
+    - "Topic name should be specific and searchable"
+    - "Description should be concise but informative"
+    - "Use present tense ('provides', 'enables')"
+    - "Focus on capability or understanding gained"
+
+  example_good:
+    - "**tRPC procedures**: Type-safe API functions defined on the backend that automatically provide type inference to the frontend without code generation"
+    - "**Prisma Client**: Auto-generated database client that provides type-safe queries based on your schema, preventing runtime errors"
+
+  example_bad:
+    - "**tRPC**: Good for APIs"
+    - "**Prisma**: Database stuff"
+
+chapter_specific_guidelines:
+  foundation_chapters:
+    focus: "Concepts and setup"
+    examples:
+      - "Development environment configuration"
+      - "Understanding architecture layers"
+      - "Tool installation and verification"
+
+  backend_chapters:
+    focus: "API development and data"
+    examples:
+      - "Creating procedures and routers"
+      - "Database queries and transactions"
+      - "Authentication and authorization"
+
+  frontend_chapters:
+    focus: "UI components and interactions"
+    examples:
+      - "React component patterns"
+      - "Form handling and validation"
+      - "State management strategies"
+
+  production_chapters:
+    focus: "Deployment and quality"
+    examples:
+      - "Platform configuration"
+      - "Testing strategies"
+      - "Monitoring and performance"
+
+cross_referencing:
+  include: "How topics connect to other chapters"
+  format: "See also: Chapter {N}"
+
+  example: |
+    ## Related Topics
+
+    - **Database schema** (covered in depth in Chapter 2)
+    - **Authentication** (we'll add this in Chapter 7)
+    - **Deployment** (final production setup in Chapter 18)
+
+complete_example:
+  template: |
+    # Chapter 5 Topics Learned
+
+    **API Architecture with tRPC**
+
+    Quick reference of key concepts covered in this chapter.
+
+    ---
+
+    ## Core Concepts
+
+    - **tRPC**: TypeScript-first RPC framework that provides end-to-end type safety
+      between client and server without code generation
+
+    - **Procedures**: Type-safe API functions that can be queries (read data) or
+      mutations (write data)
+
+    - **Routers**: Organized collections of related procedures (e.g., `partsRouter`,
+      `ordersRouter`)
+
+    - **Context**: Shared state available to all procedures, including Prisma client
+      and user session
+
+    ## Technical Skills
+
+    - **Setting up tRPC**: Configure tRPC in Next.js 14 with App Router support
+
+    - **Creating procedures**: Define type-safe API endpoints with input validation
+      and TypeScript return types
+
+    - **Input validation**: Use Zod schemas to validate procedure inputs at runtime
+
+    - **Error handling**: Throw typed errors with TRPCError for consistent error
+      responses
+
+    ## Tools & Technologies
+
+    - **@trpc/server**: Server-side tRPC library for defining routers and procedures
+
+    - **@trpc/client**: Client-side library for calling procedures with full type
+      inference
+
+    - **@trpc/react-query**: React hooks for tRPC procedures built on TanStack Query
+
+    - **Zod**: Schema validation library for runtime type checking
+
+    ## Parts-Co Application Features
+
+    - **Parts API**: tRPC router with procedures to list, search, and filter auto
+      parts
+
+    - **Type-safe catalog**: Frontend automatically knows exact structure of parts
+      data from API
+
+    - **Input validation**: All API calls validated with Zod schemas before
+      processing
+
+    ## Best Practices
+
+    - **Organize by domain**: Group related procedures into domain routers (parts,
+      orders, customers)
+
+    - **Validate all inputs**: Always use Zod schemas for procedure inputs to catch
+      invalid data
+
+    - **Type return values**: Explicitly type procedure return values for better
+      autocomplete
+
+    - **Use context**: Share common resources (Prisma, session) via tRPC context
+      instead of globals
+
+    ---
+
+    ## Related Topics
+
+    - **Prisma ORM** (Chapter 4) - Used within tRPC procedures for database access
+    - **Authentication** (Chapter 7) - Will add protected procedures requiring login
+    - **Frontend integration** (Chapter 12) - Will use these procedures in React
+      components
+
+    ---
+
+    ## What You Can Now Do
+
+    ✅ Set up tRPC in a Next.js 14 project
+    ✅ Create type-safe API procedures (queries and mutations)
+    ✅ Validate inputs with Zod schemas
+    ✅ Organize procedures into routers
+    ✅ Call procedures from the frontend with full type safety
+    ✅ Handle errors consistently with TRPCError
+
+output_structure: |
+  # Chapter {N} Topics Learned
+
+  **{Chapter Title}**
+
+  Quick reference of key concepts covered in this chapter.
+
+  ---
+
+  ## {Category 1}
+
+  - **{Topic}**: {Description}
+  - **{Topic}**: {Description}
+
+  ## {Category 2}
+
+  - **{Topic}**: {Description}
+  - **{Topic}**: {Description}
+
+  ---
+
+  ## Related Topics
+
+  - **{Topic}** (Chapter {N})
+  - **{Topic}** (Chapter {M})
+
+  ---
+
+  ## What You Can Now Do
+
+  ✅ {Capability 1}
+  ✅ {Capability 2}
+  ✅ {Capability 3}
+
+capabilities_section:
+  description: "Concrete abilities student has gained"
+  format: "✅ {Action verb} {specific thing}"
+  quantity: "5-8 capabilities"
+
+  examples:
+    - "✅ Set up PostgreSQL with Docker Compose"
+    - "✅ Create tRPC procedures with Zod validation"
+    - "✅ Deploy Next.js applications to Vercel"
+    - "✅ Implement authentication with NextAuth.js"
+    - "✅ Write unit tests for tRPC procedures"
+
+quality_checklist:
+  - "5-10 topics total across all categories"
+  - "Each topic has bold name and clear description"
+  - "Descriptions are 1-2 sentences"
+  - "Topics organized into logical categories"
+  - "Includes Parts-Co specific features built"
+  - "Cross-references to related chapters"
+  - "Capabilities section lists concrete skills gained"
+  - "No duplicates or overlap between topics"
+  - "Appropriate technical depth for chapter level"

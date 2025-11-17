@@ -1,0 +1,459 @@
+# Book Chapter Template
+# ======================
+# Structure for generating 15-25 page technical book chapters
+
+metadata:
+  target_length: "15-25 pages (5,000-8,000 words)"
+  format: "Markdown (convertible to PDF via Pandoc)"
+  reading_time: "60-90 minutes"
+  hands_on_time: "120-180 minutes"
+
+structure:
+  front_matter:
+    template: |
+      # Chapter {chapter_number}: {chapter_title}
+
+      **Estimated Time:** {total_time} hours
+      - Reading: {reading_time} minutes
+      - Hands-on exercises: {exercise_time} minutes
+
+      **Prerequisites:**
+      {prerequisites_list}
+
+      ---
+
+      ## Learning Objectives
+
+      By the end of this chapter, you will be able to:
+
+      {learning_objectives_detailed}
+
+      ---
+
+  introduction:
+    length: "2-3 paragraphs (300-500 words)"
+    template: |
+      ## Introduction
+
+      {opening_paragraph_sets_context}
+
+      {second_paragraph_explains_why_this_matters}
+
+      {third_paragraph_previews_what_youll_learn}
+
+    guidelines:
+      - "Start with a relatable scenario from Parts-Co business"
+      - "Explain why this topic is important (business value)"
+      - "Connect to previous chapter concepts"
+      - "Preview the journey through this chapter"
+      - "Set expectations for difficulty level"
+
+    example_opening: |
+      Imagine a customer browsing the Parts-Co website, adding items to their cart,
+      and clicking "Checkout." Behind the scenes, that simple click triggers a complex
+      chain of operations: validating inventory, calculating totals, processing
+      payment, updating stock levels, and sending confirmation emails. How do we
+      ensure all these operations happen reliably, even when thousands of customers
+      are checking out simultaneously?
+
+  main_content:
+    sections: "3-5 major sections"
+    each_section:
+      length: "3-5 pages (1,000-1,500 words)"
+      structure: |
+        ## {Section Title}
+
+        {Conceptual explanation (2-3 paragraphs)}
+
+        {Code example with annotations}
+
+        {Parts-Co business context}
+
+        {Common pitfalls (warnings)}
+
+        {Best practices (tips)}
+
+    section_types:
+      - name: "foundational_concept"
+        template: |
+          ## {Concept Name}
+
+          ### What is {concept}?
+
+          {Definition and explanation}
+
+          {Why it exists / problem it solves}
+
+          ### How it works
+
+          {Step-by-step explanation}
+
+          {Diagram description}
+
+          ### In Parts-Co context
+
+          {Concrete example from auto parts business}
+
+      - name: "practical_implementation"
+        template: |
+          ## Implementing {Feature}
+
+          ### Setup
+
+          {Prerequisites and dependencies}
+
+          ### Step-by-step guide
+
+          **Step 1: {task}**
+
+          {Explanation}
+
+          ```{language}
+          {code_snippet}
+          ```
+
+          {What this code does}
+
+          **Step 2: {next_task}**
+
+          (Continue for all steps...)
+
+          ### Verification
+
+          {How to confirm it works}
+
+      - name: "comparison_deep_dive"
+        template: |
+          ## {Option A} vs {Option B}
+
+          ### Understanding {Option A}
+
+          {Detailed explanation}
+
+          **Pros:**
+          - {advantage_1}
+          - {advantage_2}
+
+          **Cons:**
+          - {disadvantage_1}
+          - {disadvantage_2}
+
+          ### Understanding {Option B}
+
+          {Detailed explanation}
+
+          **Pros:**
+          - {advantage_1}
+
+          **Cons:**
+          - {disadvantage_1}
+
+          ### Our choice: {Selected Option}
+
+          {Rationale for decision}
+
+          {How it fits Parts-Co requirements}
+
+  code_integration:
+    frequency: "1-2 code examples per major section"
+    format: |
+      **Example: {example_title}**
+
+      {Brief context: what this code does and why}
+
+      ```{language}
+      {code_with_inline_comments}
+      ```
+
+      Let's break this down:
+
+      - **Line {N}:** {explanation}
+      - **Line {M}:** {explanation}
+
+      {Summary of what we accomplished}
+
+    guidelines:
+      - "Always explain BEFORE showing code"
+      - "Keep examples under 30 lines"
+      - "Use realistic Parts-Co variable names"
+      - "Include inline comments for complex lines"
+      - "Explain key lines AFTER code block"
+      - "Show complete, runnable code (no '...' ellipsis)"
+
+  callout_boxes:
+    usage: "2-3 callouts per major section"
+    types:
+      tip:
+        template: |
+          > 💡 **Tip:** {helpful_advice}
+          >
+          > {explanation_or_example}
+
+      warning:
+        template: |
+          > ⚠️ **Warning:** {what_to_avoid}
+          >
+          > {why_its_a_problem}
+          >
+          > {correct_approach}
+
+      note:
+        template: |
+          > 📝 **Note:** {additional_context}
+          >
+          > {elaboration}
+
+      example:
+        template: |
+          > 💻 **Example:** {scenario_description}
+          >
+          > ```{language}
+          > {code_example}
+          > ```
+          >
+          > {explanation}
+
+      important:
+        template: |
+          > 🔴 **Important:** {critical_information}
+          >
+          > {why_this_matters}
+
+  hands_on_exercise:
+    length: "2-4 pages"
+    template: |
+      ## Hands-On Exercise: {Exercise Title}
+
+      ### What You'll Build
+
+      {Description of end result}
+
+      {Why this exercise reinforces chapter concepts}
+
+      **Learning Goals:**
+      - {goal_1}
+      - {goal_2}
+      - {goal_3}
+
+      ### Prerequisites
+
+      Before starting, ensure you have:
+      - {prerequisite_1}
+      - {prerequisite_2}
+
+      ### Instructions
+
+      **Part 1: {first_phase}**
+
+      {High-level description}
+
+      1. {Step 1 with specific instructions}
+
+         ```{language}
+         {code_to_write}
+         ```
+
+         {Explanation of what this does}
+
+      2. {Step 2}
+
+         ```{language}
+         {code_to_write}
+         ```
+
+      (Continue for all steps...)
+
+      **Part 2: {second_phase}**
+
+      (Continue pattern...)
+
+      ### Success Criteria
+
+      You'll know you've completed the exercise successfully when:
+
+      ✅ {verification_step_1}
+      ✅ {verification_step_2}
+      ✅ {verification_step_3}
+
+      ### Troubleshooting
+
+      **Problem:** {common_error_1}
+
+      **Solution:** {how_to_fix}
+
+      ---
+
+      **Problem:** {common_error_2}
+
+      **Solution:** {how_to_fix}
+
+      ### Going Further (Optional)
+
+      If you want to challenge yourself:
+      - {extension_1}
+      - {extension_2}
+
+  summary:
+    length: "1 page"
+    template: |
+      ## Summary
+
+      In this chapter, you learned {high_level_summary}.
+
+      ### Key Takeaways
+
+      - **{Topic 1}:** {Brief description}
+      - **{Topic 2}:** {Brief description}
+      - **{Topic 3}:** {Brief description}
+      - **{Topic 4}:** {Brief description}
+      - **{Topic 5}:** {Brief description}
+
+      ### Skills Acquired
+
+      You can now:
+      - {skill_1}
+      - {skill_2}
+      - {skill_3}
+
+      ### How This Fits the Bigger Picture
+
+      {Explain how this chapter connects to overall Parts-Co app}
+
+      {Bridge to upcoming chapters}
+
+  whats_next:
+    length: "1 paragraph"
+    template: |
+      ## What's Next?
+
+      In Chapter {next_number}, we'll build on {this_chapter_concept} by exploring
+      {next_chapter_topic}. You'll learn {preview_of_next_chapter}, which will allow
+      us to {capability_unlocked}. This is where the Parts-Co application starts to
+      {milestone_description}.
+
+  further_reading:
+    template: |
+      ## Further Reading
+
+      ### Official Documentation
+
+      - [{Resource 1}]({url}) - {Brief description}
+      - [{Resource 2}]({url}) - {Brief description}
+      - [{Resource 3}]({url}) - {Brief description}
+
+      ### Recommended Tutorials
+
+      - [{Tutorial 1}]({url}) - {What you'll learn}
+      - [{Tutorial 2}]({url}) - {What you'll learn}
+
+      ### Deep Dives
+
+      - [{Advanced Resource}]({url}) - {For when you want to go deeper}
+
+      ### Community Resources
+
+      - [{Community Link}]({url}) - {Description}
+
+paragraph_guidelines:
+  length: "3-5 sentences (100-150 words)"
+  structure:
+    - "Opening sentence: Topic/main idea"
+    - "Supporting sentences: Details, examples, explanations"
+    - "Closing sentence: Summary or transition"
+
+  tone:
+    - "Conversational but professional"
+    - "Use 'you' and 'we'"
+    - "Active voice (not passive)"
+    - "Present tense for timeless concepts"
+    - "Past tense only for historical context"
+
+  example_good: |
+    tRPC revolutionizes how we build type-safe APIs in TypeScript. Instead of
+    manually maintaining separate type definitions for your frontend and backend,
+    tRPC automatically shares types between client and server. When you define a
+    procedure on the backend, your frontend immediately knows its exact input and
+    output types. This eliminates entire classes of bugs and gives you autocomplete
+    in your IDE, making development faster and more reliable.
+
+  example_bad: |
+    tRPC is good. It helps with types. You should use it for APIs. Types are
+    shared automatically. This is helpful.
+
+cross_references:
+  format: "See Chapter {N}: {Section Name}"
+  guidelines:
+    - "Reference earlier chapters for foundational concepts"
+    - "Preview future chapters for advanced topics"
+    - "Link to specific sections, not just chapter numbers"
+    - "2-3 cross-references per chapter"
+
+  example: |
+    We set up our PostgreSQL database in **Chapter 2: Database Design Review**
+    (see the "Docker Compose Configuration" section). If you skipped that section
+    or encountered errors, go back now before proceeding.
+
+terminology:
+  first_use: "Define and explain"
+  subsequent: "Use consistently"
+  acronyms: "Spell out first time: 'Application Programming Interface (API)'"
+
+  example: |
+    First use:
+    "We'll use **tRPC** (TypeScript Remote Procedure Call), a library that
+    provides end-to-end type safety for API calls."
+
+    Subsequent uses:
+    "Now that tRPC is configured, we can create our first procedure."
+
+output_format_example: |
+  # Chapter 5: API Architecture with tRPC
+
+  **Estimated Time:** 5 hours
+  - Reading: 75 minutes
+  - Hands-on exercises: 180 minutes
+
+  **Prerequisites:**
+  - Completed Chapter 4 (Prisma ORM setup)
+  - Understanding of TypeScript types
+  - Familiarity with async/await
+
+  ---
+
+  ## Learning Objectives
+
+  By the end of this chapter, you will be able to:
+
+  1. Explain how tRPC provides end-to-end type safety without code generation
+  2. Set up tRPC in a Next.js 14 project with the App Router
+  3. Create tRPC routers and procedures (queries and mutations)
+  4. Use Zod for runtime input validation
+  5. Connect the tRPC client to React components
+
+  ---
+
+  ## Introduction
+
+  (3 paragraphs introducing tRPC, why it matters, what you'll learn...)
+
+  ---
+
+  ## Understanding tRPC
+
+  (First major section...)
+
+  ### What is tRPC?
+
+  (Concept explanation...)
+
+  ```typescript
+  // Code example
+  ```
+
+  (Explanation of code...)
+
+  > 💡 **Tip:** tRPC works best in monorepo setups...
+
+  ---
+
+  (Continue with remaining sections, exercise, summary, etc.)

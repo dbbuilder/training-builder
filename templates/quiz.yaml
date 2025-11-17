@@ -1,0 +1,296 @@
+# Quiz Template
+# ==============
+# Structure for generating 10-15 question quizzes per chapter
+
+metadata:
+  target_questions: "10-15 questions"
+  format: "Markdown with answers and explanations"
+  passing_score: "70% (7-11 correct answers)"
+
+distribution:
+  multiple_choice: "60% (6-9 questions)"
+  true_false: "20% (2-3 questions)"
+  short_answer: "20% (2-3 questions)"
+
+question_types:
+  multiple_choice:
+    format: |
+      ### Question {N} (Multiple Choice)
+
+      {question_text}
+
+      a) {option_a}
+      b) {option_b}
+      c) {option_c}
+      d) {option_d}
+
+      **Answer:** {correct_letter} ✓
+
+      **Explanation:** {why_correct_and_why_others_wrong}
+
+    guidelines:
+      - "One clearly correct answer"
+      - "Three plausible distractors (wrong but reasonable)"
+      - "Avoid 'all of the above' or 'none of the above'"
+      - "Shuffle correct answer position (not always B)"
+      - "Explanation addresses why correct AND why others are wrong"
+
+    example: |
+      ### Question 1 (Multiple Choice)
+
+      What is the primary benefit of using tRPC over traditional REST APIs?
+
+      a) Better performance
+      b) End-to-end type safety ✓
+      c) Smaller bundle size
+      d) Built-in authentication
+
+      **Answer:** b) End-to-end type safety ✓
+
+      **Explanation:** tRPC's primary advantage is end-to-end type safety - your
+      frontend automatically knows the exact types of inputs and outputs for every
+      backend procedure. While REST can be performant (a), that's not tRPC's main
+      benefit. Bundle size (c) is comparable, and authentication (d) must be added
+      separately in both approaches.
+
+  true_false:
+    format: |
+      ### Question {N} (True/False)
+
+      {statement}
+
+      - [ ] True
+      - [x] False ✓
+
+      **Answer:** {True/False} ✓
+
+      **Explanation:** {why_true_or_false_with_context}
+
+    guidelines:
+      - "Clear, unambiguous statements"
+      - "Avoid double negatives"
+      - "Test important concepts, not trivia"
+      - "Explanation provides context and nuance"
+
+    example: |
+      ### Question 5 (True/False)
+
+      TypeScript type checking eliminates the need for runtime validation with Zod.
+
+      - [ ] True
+      - [x] False ✓
+
+      **Answer:** False ✓
+
+      **Explanation:** While TypeScript provides compile-time type safety, it
+      doesn't protect against runtime issues like malicious input from external
+      sources (API calls, user input). Zod performs runtime validation to ensure
+      data conforms to expected schemas even after TypeScript compilation. Both
+      are necessary: TypeScript for development-time safety, Zod for production
+      runtime safety.
+
+  short_answer:
+    format: |
+      ### Question {N} (Short Answer)
+
+      {question_requiring_2_4_sentence_answer}
+
+      **Model Answer:**
+
+      {comprehensive_answer_with_key_points}
+
+      **Grading Rubric:**
+
+      Full credit (2 points) if answer includes:
+      - {required_point_1}
+      - {required_point_2}
+
+      Partial credit (1 point) if answer includes:
+      - {required_point_1} OR {required_point_2}
+
+      No credit if answer misses both key points.
+
+    guidelines:
+      - "Ask for explanation, not simple facts"
+      - "Test understanding, not memorization"
+      - "Provide clear grading criteria"
+      - "Model answer should be 2-4 sentences"
+
+    example: |
+      ### Question 10 (Short Answer)
+
+      Explain the difference between Server Components and Client Components in
+      Next.js 14, and when you would use each.
+
+      **Model Answer:**
+
+      Server Components render on the server and send HTML to the client, reducing
+      JavaScript bundle size and improving initial page load. Client Components run
+      in the browser and can use React hooks, event handlers, and browser APIs like
+      localStorage. Use Server Components by default for data fetching and static
+      content, and use Client Components (marked with 'use client') when you need
+      interactivity or access to browser features.
+
+      **Grading Rubric:**
+
+      Full credit (2 points) if answer includes:
+      - Explains Server Components render on server, Client Components in browser
+      - Identifies when to use each (Server for data fetching, Client for interactivity)
+
+      Partial credit (1 point) if answer includes:
+      - Either the rendering distinction OR the usage guidance (but not both)
+
+      No credit if answer shows fundamental misunderstanding of component types.
+
+difficulty_distribution:
+  easy: "40% (4-6 questions) - Recall facts, definitions"
+  medium: "40% (4-6 questions) - Apply concepts, analyze code"
+  hard: "20% (2-3 questions) - Synthesize ideas, debug scenarios"
+
+question_categories:
+  conceptual:
+    percentage: "30%"
+    examples:
+      - "What is {concept}?"
+      - "Why do we use {technology}?"
+      - "How does {feature} work?"
+
+  practical:
+    percentage: "40%"
+    examples:
+      - "Which code snippet correctly implements {feature}?"
+      - "What would happen if you {scenario}?"
+      - "How would you {task}?"
+
+  troubleshooting:
+    percentage: "20%"
+    examples:
+      - "This code produces {error}. What's wrong?"
+      - "Why isn't {feature} working?"
+      - "How would you debug {problem}?"
+
+  best_practices:
+    percentage: "10%"
+    examples:
+      - "What's the recommended way to {task}?"
+      - "Which approach is more secure?"
+      - "What's the performance implication of {choice}?"
+
+parts_co_context:
+  integration: "50% of questions should reference Parts-Co domain"
+  examples:
+    - "In the Parts-Co application, which tRPC procedure would you use to..."
+    - "A customer is checking out. Which validation rule..."
+    - "The Parts catalog uses..."
+
+  realistic_scenarios: |
+    ### Question 8 (Multiple Choice)
+
+    A customer tries to add 50 units of a part to their cart, but the inventory
+    table shows only 30 units in stock. What should your tRPC procedure do?
+
+    a) Allow the order and backorder the remaining 20 units
+    b) Throw an error and prevent adding to cart ✓
+    c) Automatically reduce the quantity to 30
+    d) Add all 50 and decrement inventory to -20
+
+    **Answer:** b) Throw an error and prevent adding to cart ✓
+
+    **Explanation:** The procedure should validate inventory before allowing items
+    in the cart. Throwing an error (b) prevents overselling and notifies the user.
+    Backordering (a) might be a feature, but requires explicit logic. Auto-reducing
+    (c) could confuse customers. Negative inventory (d) violates data integrity.
+
+avoidance_guidelines:
+  avoid:
+    - "Trick questions designed to catch students"
+    - "Ambiguous wording with multiple valid interpretations"
+    - "Trivia that doesn't test understanding"
+    - "Questions testing memorization of syntax minutiae"
+    - "All of the above / None of the above options"
+    - "Double negatives (e.g., 'Which is NOT incorrect?')"
+
+  prefer:
+    - "Clear, direct questions testing core concepts"
+    - "Scenarios requiring application of knowledge"
+    - "Code analysis and debugging questions"
+    - "Questions that reinforce best practices"
+
+output_structure: |
+  # Chapter {N} Quiz: {Chapter Title}
+
+  **Instructions:**
+  - Answer all {total} questions
+  - Passing score: {passing_percentage}% ({passing_count}/{total} correct)
+  - Multiple choice: Select the best answer
+  - True/False: Select one option
+  - Short answer: Write 2-4 sentences
+
+  ---
+
+  ### Question 1 (Multiple Choice)
+
+  {question}
+
+  a) {option}
+  b) {option}
+  c) {option}
+  d) {option}
+
+  **Answer:** {correct} ✓
+
+  **Explanation:** {explanation}
+
+  ---
+
+  ### Question 2 (Multiple Choice)
+
+  {question}
+
+  (Continue for all questions...)
+
+  ---
+
+  ## Answer Key
+
+  1. b ✓
+  2. c ✓
+  3. a ✓
+  4. False ✓
+  5. True ✓
+  (etc.)
+
+  ---
+
+  ## Scoring Guide
+
+  **Your Score:** ____ / {total}
+
+  - {total}-{high}: Excellent understanding
+  - {passing}-{high-1}: Good understanding, review explanations for missed questions
+  - Below {passing}: Review chapter content and retake quiz
+
+answer_key_format:
+  include:
+    - "Quick reference list of correct answers"
+    - "Scoring guide with ranges"
+    - "Recommendation based on score"
+
+explanation_quality:
+  requirements:
+    - "Explain why correct answer is right"
+    - "Explain why each distractor is wrong (for MC questions)"
+    - "Provide additional context or nuance"
+    - "Reference specific chapter sections if helpful"
+    - "Use 2-4 sentences for explanations"
+
+  example_good: |
+    **Explanation:** tRPC provides end-to-end type safety by sharing TypeScript
+    types between your frontend and backend without code generation. The backend
+    defines procedures with typed inputs and outputs, and the frontend client
+    automatically gets those exact types. REST APIs (a) require manual type
+    definitions or code generation. GraphQL (c) requires schema definitions.
+    WebSockets (d) are for real-time communication, not type safety.
+
+  example_bad: |
+    **Explanation:** b is correct because tRPC uses types.

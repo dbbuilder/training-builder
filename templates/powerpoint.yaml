@@ -1,0 +1,267 @@
+# PowerPoint Presentation Template
+# =================================
+# Structure for generating 30-50 slide PowerPoint outlines
+
+metadata:
+  target_slides: "30-50"
+  format: "Structured text outline (convertible to .pptx)"
+  time_to_present: "45-60 minutes"
+
+structure:
+  - slide_number: 1
+    type: "title"
+    template: |
+      CHAPTER {chapter_number}: {chapter_title}
+
+      Parts-Co E-Commerce Training System
+      [Logo placeholder]
+
+  - slide_number: 2
+    type: "learning_objectives"
+    template: |
+      LEARNING OBJECTIVES
+
+      By the end of this chapter, you will be able to:
+      {learning_objectives_bullets}
+
+  - slide_number: "3-5"
+    type: "recap"
+    template: |
+      RECAP: {previous_chapter_title}
+
+      Quick review of key concepts:
+      {previous_chapter_key_points}
+
+      Today we'll build on these foundations.
+
+  - slide_number: "6-N"
+    type: "content"
+    variations:
+      - name: "concept_introduction"
+        template: |
+          {CONCEPT_NAME}
+
+          • Definition: {brief_definition}
+          • Why it matters: {business_value}
+          • How it fits: {architecture_context}
+
+      - name: "code_example"
+        template: |
+          CODE EXAMPLE: {example_title}
+
+          ```{language}
+          {code_snippet}
+          ```
+
+          Key points:
+          • {key_point_1}
+          • {key_point_2}
+
+      - name: "architecture_diagram"
+        template: |
+          ARCHITECTURE: {diagram_title}
+
+          [Diagram description for visual creation]
+
+          Components:
+          • {component_1}: {description}
+          • {component_2}: {description}
+
+          Data flow: {flow_description}
+
+      - name: "comparison_table"
+        template: |
+          COMPARISON: {vs_what}
+
+          | Aspect | Option A | Option B |
+          |--------|----------|----------|
+          | {aspect_1} | {a_value} | {b_value} |
+          | {aspect_2} | {a_value} | {b_value} |
+
+          ✓ We chose {selected_option} because {rationale}
+
+      - name: "step_by_step"
+        template: |
+          HOW TO: {task_title}
+
+          1. {step_1}
+          2. {step_2}
+          3. {step_3}
+          4. {step_4}
+
+          💡 Tip: {helpful_tip}
+
+      - name: "common_pitfall"
+        template: |
+          ⚠️ COMMON MISTAKE
+
+          Problem: {mistake_description}
+
+          Why it happens: {explanation}
+
+          Solution: {correct_approach}
+
+          Remember: {key_takeaway}
+
+      - name: "best_practice"
+        template: |
+          ✅ BEST PRACTICE
+
+          {practice_name}
+
+          Why: {rationale}
+
+          Example:
+          ```{language}
+          {good_example}
+          ```
+
+          Avoid:
+          ```{language}
+          {bad_example}
+          ```
+
+  - slide_number: "N-5 to N-3"
+    type: "exercise_preview"
+    template: |
+      HANDS-ON EXERCISE
+
+      What you'll build:
+      {exercise_description}
+
+      You'll practice:
+      • {skill_1}
+      • {skill_2}
+      • {skill_3}
+
+      Expected time: {duration}
+
+  - slide_number: "N-2"
+    type: "summary"
+    template: |
+      KEY TAKEAWAYS
+
+      Today you learned:
+      • {takeaway_1}
+      • {takeaway_2}
+      • {takeaway_3}
+      • {takeaway_4}
+      • {takeaway_5}
+
+      You can now: {capability_statement}
+
+  - slide_number: "N-1"
+    type: "quiz_preview"
+    template: |
+      CHECK YOUR UNDERSTANDING
+
+      Sample questions:
+
+      1. {sample_question_1}
+      2. {sample_question_2}
+
+      Complete the full quiz to test your knowledge!
+
+  - slide_number: "N"
+    type: "next_chapter"
+    template: |
+      NEXT UP: CHAPTER {next_chapter_number}
+
+      {next_chapter_title}
+
+      We'll cover:
+      • {next_topic_1}
+      • {next_topic_2}
+      • {next_topic_3}
+
+      Building on today's {key_concept_from_this_chapter}
+
+guidelines:
+  slide_density:
+    - "5-7 bullet points maximum per slide"
+    - "Code snippets: 10-15 lines maximum"
+    - "Diagrams: Simple, clear, labeled"
+    - "One main idea per slide"
+
+  visual_balance:
+    - "60% content slides (concepts, code, diagrams)"
+    - "20% practical slides (how-to, examples)"
+    - "10% cautionary slides (warnings, pitfalls)"
+    - "10% motivational/summary slides"
+
+  pacing:
+    - "Spend 3-5 slides on each major concept"
+    - "Include code example within 2 slides of introducing concept"
+    - "Interleave theory and practice"
+    - "Build complexity gradually"
+
+  transitions:
+    - "Each slide should connect to previous"
+    - "Use transition phrases: 'Now that we understand X, let's explore Y'"
+    - "Signal topic changes clearly"
+    - "Reinforce progression through material"
+
+parts_co_context:
+  always_include:
+    - "Relate abstract concepts to auto parts business"
+    - "Use consistent entity names (Part, Manufacturer, Order, etc.)"
+    - "Reference the ERD diagram when discussing data"
+    - "Ground examples in realistic scenarios"
+
+  business_scenarios:
+    - "Customer browsing parts catalog"
+    - "Adding items to shopping cart"
+    - "Processing an order"
+    - "Checking inventory availability"
+    - "Supplier price comparison"
+    - "Warehouse stock management"
+
+speaker_notes:
+  include_for_each_slide:
+    - "Talking points (what to say beyond what's on slide)"
+    - "Time estimate (how long to spend)"
+    - "Interactive elements (questions to ask class)"
+    - "Common questions students ask"
+    - "Demonstrations to perform"
+
+  example: |
+    SPEAKER NOTES:
+
+    Time: 3 minutes
+
+    Talking Points:
+    - Emphasize that tRPC isn't magic - it's TypeScript types
+    - Contrast with REST where you'd need separate API client
+    - Mention this only works in TypeScript monorepos
+
+    Demo:
+    - Show autocomplete in VS Code when calling procedure
+    - Deliberately pass wrong type and show error
+    - Show how changing backend type updates frontend
+
+    Common Questions:
+    - "Can I use tRPC with non-TypeScript frontends?" (No)
+    - "Does this work with mobile apps?" (No, use REST + codegen)
+
+    Transition: "Now that we understand WHAT tRPC does, let's see HOW to set it up."
+
+output_format: |
+  # Chapter {N}: {Title}
+
+  ## Slide 1: Title
+  {slide_content}
+
+  **Speaker Notes:**
+  {speaker_notes}
+
+  ---
+
+  ## Slide 2: Learning Objectives
+  {slide_content}
+
+  **Speaker Notes:**
+  {speaker_notes}
+
+  ---
+
+  (Continue for all slides...)

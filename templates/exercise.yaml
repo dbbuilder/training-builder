@@ -1,0 +1,458 @@
+# Hands-On Exercise Template
+# ===========================
+# Structure for generating 3-5 practical exercises per chapter
+
+metadata:
+  target_exercises: "3-5 exercises per chapter"
+  format: "Step-by-step instructions with code snippets"
+  estimated_time: "30-60 minutes per exercise"
+
+structure:
+  overview:
+    template: |
+      # Hands-On Exercise {N}: {Exercise Title}
+
+      ## What You'll Build
+
+      {Description of what student will create/implement}
+
+      {Visual description or expected outcome}
+
+      ## Why This Matters
+
+      {How this exercise reinforces chapter concepts}
+
+      {Real-world application in Parts-Co context}
+
+      ## Learning Goals
+
+      By completing this exercise, you will:
+      - {goal_1}
+      - {goal_2}
+      - {goal_3}
+
+      ## Estimated Time
+
+      {time_estimate} minutes
+
+    guidelines:
+      - "Clear description of end result"
+      - "Explain connection to chapter concepts"
+      - "3-5 specific learning goals"
+      - "Realistic time estimate"
+
+  prerequisites:
+    template: |
+      ## Prerequisites
+
+      Before starting, ensure you have:
+      - ✅ {prerequisite_1}
+      - ✅ {prerequisite_2}
+      - ✅ {prerequisite_3}
+
+      **Checkpoint:** If you don't have these ready, go back to {reference}.
+
+    guidelines:
+      - "List all required prior work"
+      - "Reference specific chapters or sections"
+      - "Include tool/dependency requirements"
+      - "Use checkboxes for clarity"
+
+  instructions:
+    structure: "Multiple parts/phases"
+    template: |
+      ## Instructions
+
+      **Part 1: {Phase Name}**
+
+      {High-level description of this phase}
+
+      **Step 1: {Task description}**
+
+      {Detailed instructions}
+
+      {Optional: Screenshot or diagram description}
+
+      ```{language}
+      {code_to_write}
+      ```
+
+      💡 **What this does:** {Explanation}
+
+      **Step 2: {Next task}**
+
+      {Instructions}
+
+      ```{language}
+      {code}
+      ```
+
+      ⚠️ **Common mistake:** {Warning}
+
+      ---
+
+      **Part 2: {Next Phase}**
+
+      (Continue pattern...)
+
+    guidelines:
+      - "Break into logical phases (2-4 parts)"
+      - "Number steps sequentially within each part"
+      - "Provide complete, working code snippets"
+      - "Explain what each code block does"
+      - "Include warnings for common mistakes"
+      - "Use callout boxes (tips, warnings, notes)"
+
+step_types:
+  setup_step:
+    template: |
+      **Step {N}: {Setup task}**
+
+      {Why this setup is needed}
+
+      ```bash
+      {command}
+      ```
+
+      {Expected output}
+
+  code_implementation:
+    template: |
+      **Step {N}: {Implementation task}**
+
+      {Context: what you're building and why}
+
+      Create `{filename}`:
+
+      ```{language}
+      {complete_code}
+      ```
+
+      **Breaking it down:**
+      - **Line {N}:** {explanation}
+      - **Line {M}:** {explanation}
+
+  verification_step:
+    template: |
+      **Step {N}: {Verification task}**
+
+      {How to test what you just built}
+
+      ```bash
+      {command_to_run}
+      ```
+
+      **Expected result:**
+      ```
+      {expected_output}
+      ```
+
+      ✅ If you see this, you're on the right track!
+
+  integration_step:
+    template: |
+      **Step {N}: {Integration task}**
+
+      {Connect pieces together}
+
+      {Explanation of how components interact}
+
+      ```{language}
+      {integration_code}
+      ```
+
+      {What should happen now}
+
+code_snippets:
+  guidelines:
+    - "Provide complete, copy-pasteable code"
+    - "No ellipsis (...) - show full implementation"
+    - "Include all necessary imports"
+    - "Use realistic Parts-Co variable names"
+    - "Add inline comments for complex logic"
+    - "Keep each snippet under 30 lines"
+
+  format: |
+    ```{language}
+    // {Brief description}
+    {code}
+    ```
+
+  example: |
+    ```typescript
+    // Create tRPC procedure to fetch parts by category
+    export const partsRouter = router({
+      getByCategory: publicProcedure
+        .input(z.object({
+          categoryId: z.number(),
+          limit: z.number().optional().default(20)
+        }))
+        .query(async ({ input, ctx }) => {
+          return await ctx.prisma.part.findMany({
+            where: { categoryId: input.categoryId },
+            take: input.limit,
+            include: {
+              manufacturer: true,
+              category: true
+            }
+          });
+        })
+    });
+    ```
+
+success_criteria:
+  template: |
+    ## Success Criteria
+
+    You'll know you've completed the exercise successfully when:
+
+    ✅ {verification_1}
+    ✅ {verification_2}
+    ✅ {verification_3}
+    ✅ {verification_4}
+
+    **Final check:** {comprehensive_test}
+
+  guidelines:
+    - "4-6 specific, testable criteria"
+    - "Include visual checks (UI works)"
+    - "Include functional checks (code runs)"
+    - "Include data checks (database updated)"
+    - "Provide comprehensive final test"
+
+  example: |
+    ## Success Criteria
+
+    You'll know you've completed the exercise successfully when:
+
+    ✅ Your tRPC procedure compiles without TypeScript errors
+    ✅ Visiting `/api/trpc/parts.getByCategory?input={"categoryId":1}` returns JSON
+    ✅ The frontend component displays parts filtered by category
+    ✅ Changing the category dropdown updates the displayed parts
+    ✅ The browser console shows no errors
+    ✅ TypeScript autocomplete works when calling the procedure
+
+    **Final check:** Navigate to http://localhost:3000/parts?category=1 and
+    verify you see a filtered list of parts from category 1.
+
+troubleshooting:
+  template: |
+    ## Troubleshooting
+
+    ### Problem: {Common error or issue}
+
+    **Symptoms:**
+    - {symptom_1}
+    - {symptom_2}
+
+    **Likely cause:** {Explanation}
+
+    **Solution:**
+
+    1. {Fix step 1}
+    2. {Fix step 2}
+
+    {Code fix if applicable}
+
+    ---
+
+    ### Problem: {Another common issue}
+
+    (Repeat pattern...)
+
+  guidelines:
+    - "Include 3-5 most common problems"
+    - "Describe symptoms clearly"
+    - "Explain likely cause"
+    - "Provide step-by-step solution"
+    - "Include code fixes where relevant"
+
+  example: |
+    ## Troubleshooting
+
+    ### Problem: "Cannot find module '@/lib/trpc'"
+
+    **Symptoms:**
+    - TypeScript error when importing tRPC client
+    - Red squiggly lines in editor
+    - Build fails with module not found
+
+    **Likely cause:** The path alias `@` isn't configured in `tsconfig.json`
+
+    **Solution:**
+
+    1. Open `tsconfig.json`
+    2. Add the paths configuration:
+
+    ```json
+    {
+      "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+          "@/*": ["./src/*"]
+        }
+      }
+    }
+    ```
+
+    3. Restart your TypeScript server (Cmd+Shift+P → "Restart TS Server")
+
+    ---
+
+    ### Problem: tRPC procedure returns "UNAUTHORIZED"
+
+    **Symptoms:**
+    - Browser console shows 401 error
+    - Procedure works with `publicProcedure` but not `protectedProcedure`
+
+    **Likely cause:** You're not logged in or session isn't configured
+
+    **Solution:**
+
+    1. Check if you're logged in: Console → `document.cookie` should show session
+    2. If not logged in, visit `/api/auth/signin` first
+    3. Ensure NextAuth is properly configured (see Chapter 7)
+    4. Check middleware allows access to tRPC routes
+
+going_further:
+  template: |
+    ## Going Further (Optional)
+
+    If you want to challenge yourself, try these extensions:
+
+    **Easy:** {extension_1}
+
+    **Medium:** {extension_2}
+
+    **Advanced:** {extension_3}
+
+  guidelines:
+    - "Provide 2-4 optional extensions"
+    - "Range from easy to advanced"
+    - "Build on core exercise"
+    - "No solutions provided (student exploration)"
+
+  example: |
+    ## Going Further (Optional)
+
+    If you want to challenge yourself, try these extensions:
+
+    **Easy:** Add pagination to the parts list using cursor-based pagination
+
+    **Medium:** Implement a search feature that filters parts by name or part number
+
+    **Advanced:** Add a "Recently Viewed" feature using localStorage and a tRPC
+    procedure to fetch those parts by IDs
+
+    **Expert:** Implement infinite scroll instead of pagination using TanStack Query's
+    `useInfiniteQuery`
+
+parts_co_context:
+  always_include:
+    - "Use realistic auto parts business scenarios"
+    - "Reference actual entities (Part, Manufacturer, Order, etc.)"
+    - "Build features that would exist in real e-commerce site"
+    - "Connect to larger application architecture"
+
+  examples:
+    - "Build a parts catalog filter by category and manufacturer"
+    - "Implement 'Add to Cart' functionality with inventory validation"
+    - "Create an order summary page with line items and totals"
+    - "Build a supplier comparison view showing prices from multiple sources"
+
+exercise_progression:
+  exercise_1:
+    difficulty: "Easy - Foundation"
+    purpose: "Practice single concept from chapter"
+    example: "Create your first tRPC query procedure"
+
+  exercise_2:
+    difficulty: "Medium - Application"
+    purpose: "Combine multiple concepts"
+    example: "Build a complete CRUD router with validation"
+
+  exercise_3:
+    difficulty: "Medium-Hard - Integration"
+    purpose: "Connect frontend and backend"
+    example: "Connect tRPC procedure to React component with error handling"
+
+  exercise_4:
+    difficulty: "Hard - Real-World"
+    purpose: "Build production-ready feature"
+    example: "Implement complete parts catalog with filters, search, and pagination"
+
+output_structure: |
+  # Hands-On Exercise {N}: {Title}
+
+  ## What You'll Build
+
+  {Description}
+
+  ## Why This Matters
+
+  {Connection to concepts}
+
+  ## Learning Goals
+
+  - {goal_1}
+  - {goal_2}
+
+  ## Estimated Time
+
+  {time} minutes
+
+  ---
+
+  ## Prerequisites
+
+  - ✅ {prereq_1}
+  - ✅ {prereq_2}
+
+  ---
+
+  ## Instructions
+
+  **Part 1: {Phase}**
+
+  **Step 1: {Task}**
+
+  {Instructions}
+
+  ```{language}
+  {code}
+  ```
+
+  (Continue all steps...)
+
+  ---
+
+  ## Success Criteria
+
+  ✅ {criterion_1}
+  ✅ {criterion_2}
+
+  ---
+
+  ## Troubleshooting
+
+  ### Problem: {Issue}
+
+  **Solution:** {Fix}
+
+  ---
+
+  ## Going Further (Optional)
+
+  {Extensions}
+
+quality_checklist:
+  - "Clear learning goals stated upfront"
+  - "All prerequisites listed"
+  - "Steps are numbered and sequential"
+  - "Every code snippet is complete and runnable"
+  - "Explanations provided for each code block"
+  - "Success criteria are specific and testable"
+  - "Common problems addressed in troubleshooting"
+  - "Optional extensions provided for advanced students"
+  - "Realistic Parts-Co business context"
+  - "Appropriate difficulty for chapter position"

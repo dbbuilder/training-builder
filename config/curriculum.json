@@ -1,0 +1,699 @@
+{
+  "course": {
+    "name": "Parts-Co E-Commerce Full-Stack Training System",
+    "subtitle": "From Database to Deployment",
+    "version": "1.0",
+    "targetAudience": [
+      "Junior to mid-level developers",
+      "Computer science students (3rd-4th year)",
+      "Bootcamp graduates wanting deeper understanding",
+      "Self-taught developers filling knowledge gaps",
+      "Career switchers moving into full-stack development"
+    ],
+    "prerequisites": [
+      "Basic programming knowledge (any language)",
+      "Understanding of HTML/CSS",
+      "Familiarity with command line",
+      "Basic SQL knowledge"
+    ],
+    "estimatedDuration": "80-120 hours student work",
+    "outputPath": "/mnt/e/Downloads/nascar_course/parts-co/chapters"
+  },
+  "technologyStack": {
+    "database": {
+      "name": "PostgreSQL",
+      "deployment": "Railway",
+      "tools": ["pgAdmin", "DBeaver", "Prisma Studio"]
+    },
+    "backend": {
+      "framework": "Next.js 14 API Routes",
+      "api": "tRPC",
+      "orm": "Prisma",
+      "validation": "Zod",
+      "deployment": "Vercel"
+    },
+    "frontend": {
+      "framework": "Next.js 14 (App Router)",
+      "library": "React 18",
+      "styling": "Tailwind CSS",
+      "components": "shadcn/ui",
+      "stateManagement": ["Zustand", "TanStack Query"],
+      "deployment": "Vercel"
+    },
+    "localDevelopment": {
+      "containerization": "Docker + Docker Compose",
+      "runtime": "Node.js 20+"
+    },
+    "additionalServices": {
+      "authentication": "NextAuth.js",
+      "payments": "Stripe (test mode)",
+      "email": "Resend",
+      "storage": "Vercel Blob"
+    }
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Introduction to Full-Stack Development & Project Overview",
+      "part": "Foundation",
+      "learningObjectives": [
+        "Understand the full-stack architecture",
+        "Set up development environment",
+        "Install required tools (Node, Docker, VSCode, Git)",
+        "Clone the starter repository",
+        "Run 'Hello World' Next.js app"
+      ],
+      "topicsLearned": [
+        "Full-stack architecture layers",
+        "Client-server model",
+        "REST vs tRPC vs GraphQL",
+        "Modern JavaScript ecosystem",
+        "Docker basics",
+        "Version control with Git"
+      ],
+      "exercises": [
+        "Install Docker Desktop",
+        "Install Node.js 20+",
+        "Clone starter repo",
+        "Run npm install",
+        "Start development server",
+        "View 'Hello World' page"
+      ],
+      "checkpointTag": "chapter-01-hello-world"
+    },
+    {
+      "number": 2,
+      "title": "Database Design Review & PostgreSQL Setup",
+      "part": "Foundation",
+      "learningObjectives": [
+        "Review the Parts-Co database schema",
+        "Understand normalization (recap from database course)",
+        "Set up PostgreSQL with Docker",
+        "Connect to database using GUI tools (pgAdmin/DBeaver)",
+        "Execute schema creation script"
+      ],
+      "topicsLearned": [
+        "PostgreSQL vs SQL Server syntax differences",
+        "Docker Compose for multi-container apps",
+        "Database connection strings",
+        "Environment variables",
+        "Schema migration basics"
+      ],
+      "exercises": [
+        "Create docker-compose.yml",
+        "Start PostgreSQL container",
+        "Connect with pgAdmin",
+        "Run schema creation script",
+        "Verify tables created",
+        "Insert sample data"
+      ],
+      "checkpointTag": "chapter-02-database-setup"
+    },
+    {
+      "number": 3,
+      "title": "Data Seeding & Sample Data Generation",
+      "part": "Foundation",
+      "learningObjectives": [
+        "Create comprehensive seed data script",
+        "Understand referential integrity during insertion",
+        "Use Faker.js for realistic data generation",
+        "Implement idempotent seed scripts",
+        "Verify data via SQL queries"
+      ],
+      "topicsLearned": [
+        "Seed data strategies",
+        "Transaction handling",
+        "ON CONFLICT DO NOTHING (upserts)",
+        "Foreign key insertion order",
+        "Data generation libraries"
+      ],
+      "exercises": [
+        "Write seed script for Manufacturers",
+        "Generate 50 realistic parts",
+        "Create customer accounts",
+        "Generate order history",
+        "Run seed script multiple times (idempotency test)",
+        "Query data to verify relationships"
+      ],
+      "checkpointTag": "chapter-03-data-seeding"
+    },
+    {
+      "number": 4,
+      "title": "Introduction to Prisma ORM",
+      "part": "Foundation",
+      "learningObjectives": [
+        "Understand ORM benefits and trade-offs",
+        "Install and configure Prisma",
+        "Generate Prisma schema from existing database",
+        "Use Prisma Client for type-safe queries",
+        "Understand migrations vs introspection"
+      ],
+      "topicsLearned": [
+        "ORM concepts (abstraction over SQL)",
+        "Prisma schema language",
+        "Type generation",
+        "Database introspection",
+        "Prisma Client API"
+      ],
+      "exercises": [
+        "Install Prisma CLI",
+        "Initialize Prisma in project",
+        "Introspect existing database",
+        "Generate Prisma Client",
+        "Write first type-safe query",
+        "Compare Prisma vs raw SQL"
+      ],
+      "checkpointTag": "chapter-04-prisma-setup"
+    },
+    {
+      "number": 5,
+      "title": "API Architecture with tRPC",
+      "part": "Backend API",
+      "learningObjectives": [
+        "Understand tRPC's end-to-end type safety",
+        "Set up tRPC in Next.js project",
+        "Create tRPC router and procedures",
+        "Use Zod for input validation",
+        "Connect tRPC client to frontend"
+      ],
+      "topicsLearned": [
+        "tRPC vs REST vs GraphQL",
+        "Type-safe APIs without code generation",
+        "Router organization patterns",
+        "Input/output validation with Zod",
+        "Error handling in tRPC"
+      ],
+      "exercises": [
+        "Install tRPC and dependencies",
+        "Create app/api/trpc route",
+        "Define first router (parts.ts)",
+        "Add getParts query procedure",
+        "Set up tRPC client in components",
+        "Call procedure from React component"
+      ],
+      "checkpointTag": "chapter-05-trpc-basics"
+    },
+    {
+      "number": 6,
+      "title": "CRUD Operations: Parts Management",
+      "part": "Backend API",
+      "learningObjectives": [
+        "Implement full CRUD for Parts entity",
+        "Handle complex Prisma queries (joins, filters)",
+        "Implement pagination and sorting",
+        "Add validation rules with Zod",
+        "Test procedures with Postman/REST Client"
+      ],
+      "topicsLearned": [
+        "CRUD operation patterns",
+        "Prisma query composition",
+        "Pagination strategies (cursor vs offset)",
+        "Search and filtering",
+        "Zod schema composition"
+      ],
+      "exercises": [
+        "Create parts.create procedure",
+        "Implement parts.update with partial data",
+        "Add parts.delete with cascade logic",
+        "Build parts.search with filters",
+        "Add pagination to parts.list",
+        "Test all procedures"
+      ],
+      "checkpointTag": "chapter-06-parts-crud"
+    },
+    {
+      "number": 7,
+      "title": "Authentication with NextAuth.js",
+      "part": "Backend API",
+      "learningObjectives": [
+        "Set up NextAuth.js in Next.js 14",
+        "Implement credentials provider",
+        "Add OAuth providers (Google)",
+        "Protect tRPC procedures",
+        "Manage user sessions"
+      ],
+      "topicsLearned": [
+        "Authentication vs authorization",
+        "JWT vs session-based auth",
+        "OAuth 2.0 flow",
+        "NextAuth.js configuration",
+        "Middleware for route protection"
+      ],
+      "exercises": [
+        "Install NextAuth.js",
+        "Create auth route handler",
+        "Configure credentials provider",
+        "Add Google OAuth",
+        "Protect tRPC router",
+        "Add session to procedures context"
+      ],
+      "checkpointTag": "chapter-07-authentication"
+    },
+    {
+      "number": 8,
+      "title": "User Roles & Authorization",
+      "part": "Backend API",
+      "learningObjectives": [
+        "Implement role-based access control (RBAC)",
+        "Create admin vs customer roles",
+        "Protect procedures by role",
+        "Implement row-level security patterns",
+        "Handle authorization errors"
+      ],
+      "topicsLearned": [
+        "RBAC patterns",
+        "Role assignment strategies",
+        "Authorization middleware",
+        "Permission checking",
+        "Secure data filtering"
+      ],
+      "exercises": [
+        "Add role field to User table",
+        "Create authorization middleware",
+        "Protect admin procedures",
+        "Implement customer-scoped queries",
+        "Test role-based access",
+        "Handle unauthorized errors"
+      ],
+      "checkpointTag": "chapter-08-authorization"
+    },
+    {
+      "number": 9,
+      "title": "Advanced Queries: Inventory & Orders",
+      "part": "Backend API",
+      "learningObjectives": [
+        "Implement complex multi-table joins",
+        "Build inventory management procedures",
+        "Create order processing logic",
+        "Handle transactions with Prisma",
+        "Implement business rule validation"
+      ],
+      "topicsLearned": [
+        "Advanced Prisma queries",
+        "Transaction isolation levels",
+        "Optimistic concurrency control",
+        "Business logic in API layer",
+        "Data integrity patterns"
+      ],
+      "exercises": [
+        "Build inventory.checkStock procedure",
+        "Implement inventory.restock with transaction",
+        "Create order.create with line items",
+        "Add order.calculateTotal logic",
+        "Implement inventory.reserve",
+        "Test concurrent order scenarios"
+      ],
+      "checkpointTag": "chapter-09-advanced-queries"
+    },
+    {
+      "number": 10,
+      "title": "Next.js 14 App Router Fundamentals",
+      "part": "Frontend",
+      "learningObjectives": [
+        "Understand App Router vs Pages Router",
+        "Learn Server vs Client Components",
+        "Implement layouts and nested routing",
+        "Use route groups and parallel routes",
+        "Optimize with React Server Components"
+      ],
+      "topicsLearned": [
+        "App Router architecture",
+        "Server Components benefits",
+        "File-based routing",
+        "Loading and error states",
+        "Metadata and SEO"
+      ],
+      "exercises": [
+        "Create app directory structure",
+        "Build layout hierarchy",
+        "Add loading.tsx states",
+        "Implement error.tsx boundaries",
+        "Create dynamic routes [id]",
+        "Add metadata to pages"
+      ],
+      "checkpointTag": "chapter-10-app-router"
+    },
+    {
+      "number": 11,
+      "title": "Styling with Tailwind CSS & shadcn/ui",
+      "part": "Frontend",
+      "learningObjectives": [
+        "Set up Tailwind CSS in Next.js",
+        "Install and configure shadcn/ui",
+        "Build responsive layouts",
+        "Create reusable components",
+        "Implement dark mode"
+      ],
+      "topicsLearned": [
+        "Utility-first CSS",
+        "Tailwind configuration",
+        "shadcn/ui component library",
+        "Responsive design patterns",
+        "Theme customization"
+      ],
+      "exercises": [
+        "Install Tailwind CSS",
+        "Configure tailwind.config.js",
+        "Install shadcn/ui CLI",
+        "Add Button, Card, Input components",
+        "Build header with navigation",
+        "Implement dark mode toggle"
+      ],
+      "checkpointTag": "chapter-11-styling"
+    },
+    {
+      "number": 12,
+      "title": "tRPC Client Integration & Data Fetching",
+      "part": "Frontend",
+      "learningObjectives": [
+        "Connect tRPC client in React components",
+        "Use TanStack Query for server state",
+        "Implement loading and error states",
+        "Handle optimistic updates",
+        "Cache and revalidate data"
+      ],
+      "topicsLearned": [
+        "tRPC React hooks",
+        "TanStack Query concepts",
+        "Server state management",
+        "Cache invalidation",
+        "Optimistic UI updates"
+      ],
+      "exercises": [
+        "Set up tRPC React Query client",
+        "Use trpc.parts.list.useQuery",
+        "Display parts in table",
+        "Add loading skeleton",
+        "Handle query errors",
+        "Implement pagination"
+      ],
+      "checkpointTag": "chapter-12-trpc-client"
+    },
+    {
+      "number": 13,
+      "title": "Forms & Mutations with React Hook Form",
+      "part": "Frontend",
+      "learningObjectives": [
+        "Set up React Hook Form",
+        "Integrate with Zod validation",
+        "Build create/edit forms",
+        "Handle form submission errors",
+        "Implement tRPC mutations"
+      ],
+      "topicsLearned": [
+        "Form state management",
+        "Client-side validation",
+        "Zod schema reuse (frontend/backend)",
+        "Mutation handling",
+        "Toast notifications"
+      ],
+      "exercises": [
+        "Install React Hook Form",
+        "Create AddPartForm component",
+        "Integrate Zod schema",
+        "Use trpc.parts.create.useMutation",
+        "Handle validation errors",
+        "Add success toast"
+      ],
+      "checkpointTag": "chapter-13-forms"
+    },
+    {
+      "number": 14,
+      "title": "Shopping Cart & Client State with Zustand",
+      "part": "Frontend",
+      "learningObjectives": [
+        "Set up Zustand store",
+        "Implement cart functionality",
+        "Persist cart to localStorage",
+        "Sync cart across tabs",
+        "Calculate totals and discounts"
+      ],
+      "topicsLearned": [
+        "Client state management",
+        "Zustand store patterns",
+        "LocalStorage persistence",
+        "State synchronization",
+        "Derived state (selectors)"
+      ],
+      "exercises": [
+        "Create cart store with Zustand",
+        "Implement addToCart action",
+        "Build CartItem component",
+        "Add quantity controls",
+        "Persist to localStorage",
+        "Calculate cart totals"
+      ],
+      "checkpointTag": "chapter-14-cart"
+    },
+    {
+      "number": 15,
+      "title": "Checkout Flow & Stripe Integration",
+      "part": "Frontend",
+      "learningObjectives": [
+        "Set up Stripe in test mode",
+        "Create checkout procedure",
+        "Implement Stripe payment flow",
+        "Handle webhooks",
+        "Show order confirmation"
+      ],
+      "topicsLearned": [
+        "Payment processing fundamentals",
+        "Stripe API integration",
+        "PCI compliance basics",
+        "Webhook verification",
+        "Order fulfillment"
+      ],
+      "exercises": [
+        "Install Stripe SDK",
+        "Create checkout.createSession procedure",
+        "Build CheckoutForm component",
+        "Redirect to Stripe Checkout",
+        "Handle webhook events",
+        "Display order confirmation"
+      ],
+      "checkpointTag": "chapter-15-checkout"
+    },
+    {
+      "number": 16,
+      "title": "Email Notifications with Resend",
+      "part": "Production Features",
+      "learningObjectives": [
+        "Set up Resend for transactional emails",
+        "Create email templates",
+        "Send order confirmations",
+        "Handle email errors",
+        "Test email delivery"
+      ],
+      "topicsLearned": [
+        "Transactional email services",
+        "Email template design",
+        "HTML email best practices",
+        "Error handling for emails",
+        "Email deliverability"
+      ],
+      "exercises": [
+        "Install Resend SDK",
+        "Create email templates",
+        "Send order confirmation email",
+        "Send password reset email",
+        "Test with Resend dashboard",
+        "Handle send failures"
+      ],
+      "checkpointTag": "chapter-16-email"
+    },
+    {
+      "number": 17,
+      "title": "Database Deployment to Railway",
+      "part": "Production Deployment",
+      "learningObjectives": [
+        "Create Railway account and project",
+        "Provision PostgreSQL database",
+        "Run migrations on production database",
+        "Seed production data",
+        "Configure connection pooling"
+      ],
+      "topicsLearned": [
+        "Production database setup",
+        "Railway platform features",
+        "Migration strategies",
+        "Connection pooling (PgBouncer)",
+        "Database backups"
+      ],
+      "exercises": [
+        "Create Railway project",
+        "Provision PostgreSQL service",
+        "Copy connection string",
+        "Run Prisma migrations",
+        "Seed production data",
+        "Verify tables via Railway dashboard"
+      ],
+      "checkpointTag": "chapter-17-railway-db"
+    },
+    {
+      "number": 18,
+      "title": "Application Deployment to Vercel",
+      "part": "Production Deployment",
+      "learningObjectives": [
+        "Connect GitHub repo to Vercel",
+        "Configure environment variables",
+        "Deploy Next.js app (UI + API)",
+        "Set up custom domain",
+        "Monitor deployments"
+      ],
+      "topicsLearned": [
+        "Vercel platform features",
+        "Continuous deployment",
+        "Environment variable management",
+        "Custom domains and SSL",
+        "Deployment previews"
+      ],
+      "exercises": [
+        "Create Vercel account",
+        "Import GitHub repository",
+        "Add environment variables",
+        "Deploy to production",
+        "Configure custom domain",
+        "Test production app"
+      ],
+      "checkpointTag": "chapter-18-vercel-deploy"
+    },
+    {
+      "number": 19,
+      "title": "Testing: Unit, Integration, E2E",
+      "part": "Production Quality",
+      "learningObjectives": [
+        "Set up Vitest for unit tests",
+        "Test tRPC procedures",
+        "Write integration tests with Prisma",
+        "Add E2E tests with Playwright",
+        "Run tests in CI/CD"
+      ],
+      "topicsLearned": [
+        "Testing pyramid",
+        "Unit testing tRPC procedures",
+        "Database testing patterns",
+        "E2E testing strategies",
+        "CI/CD integration"
+      ],
+      "exercises": [
+        "Install Vitest and testing libraries",
+        "Write unit tests for procedures",
+        "Create test database",
+        "Write integration tests",
+        "Add Playwright E2E tests",
+        "Run tests in GitHub Actions"
+      ],
+      "checkpointTag": "chapter-19-testing"
+    },
+    {
+      "number": 20,
+      "title": "Monitoring, Analytics & Performance",
+      "part": "Production Quality",
+      "learningObjectives": [
+        "Set up Vercel Analytics",
+        "Add error tracking with Sentry",
+        "Implement logging",
+        "Monitor performance metrics",
+        "Optimize bundle size"
+      ],
+      "topicsLearned": [
+        "Application monitoring",
+        "Error tracking and alerting",
+        "Performance metrics (Web Vitals)",
+        "Logging best practices",
+        "Frontend optimization"
+      ],
+      "exercises": [
+        "Enable Vercel Analytics",
+        "Install and configure Sentry",
+        "Add structured logging",
+        "Monitor Core Web Vitals",
+        "Analyze bundle with webpack-bundle-analyzer",
+        "Implement code splitting"
+      ],
+      "checkpointTag": "chapter-20-monitoring"
+    }
+  ],
+  "deliveryFormat": {
+    "componentsPerChapter": [
+      {
+        "name": "PowerPoint Presentation",
+        "targetSlides": "30-50 slides",
+        "format": "Structured outline (text format)",
+        "sections": [
+          "Title slide",
+          "Learning objectives",
+          "Content slides (concepts, code, diagrams)",
+          "Exercise preview",
+          "Summary",
+          "Next chapter preview"
+        ]
+      },
+      {
+        "name": "Book Chapter",
+        "targetPages": "15-25 pages",
+        "format": "Markdown",
+        "sections": [
+          "Chapter title and number",
+          "Learning objectives",
+          "Prerequisites",
+          "Introduction",
+          "Main content (3-5 sections)",
+          "Hands-on exercise",
+          "Summary",
+          "What's next",
+          "Further reading"
+        ]
+      },
+      {
+        "name": "Hands-On Exercises",
+        "targetExercises": "3-5 exercises",
+        "format": "Step-by-step instructions",
+        "includes": [
+          "Prerequisites",
+          "Step-by-step instructions",
+          "Code snippets",
+          "Success criteria",
+          "Troubleshooting tips"
+        ]
+      },
+      {
+        "name": "Q&A / FAQ",
+        "targetQuestions": "10-15 questions",
+        "format": "Question and answer pairs",
+        "categories": [
+          "Conceptual questions",
+          "Practical how-to questions",
+          "Troubleshooting questions",
+          "Best practices"
+        ]
+      },
+      {
+        "name": "Quiz",
+        "targetQuestions": "10-15 questions",
+        "format": "Markdown with answers",
+        "questionTypes": [
+          "Multiple choice (4 options)",
+          "True/false with explanation",
+          "Short answer",
+          "Code completion/debugging"
+        ]
+      },
+      {
+        "name": "Topics Learned Summary",
+        "targetItems": "5-10 key topics",
+        "format": "Bulleted list with brief descriptions"
+      },
+      {
+        "name": "Code Checkpoint",
+        "format": "Git tag and README",
+        "includes": [
+          "Git tag name",
+          "What's working at this checkpoint",
+          "How to verify",
+          "Next steps"
+        ]
+      }
+    ]
+  }
+}

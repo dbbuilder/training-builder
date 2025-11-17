@@ -1,0 +1,392 @@
+# PARTS-CO TRAINING SYSTEM STYLE GUIDE
+# =====================================
+# Comprehensive writing and formatting standards for all curriculum materials
+
+brand:
+  name: "Parts-Co E-Commerce Training System"
+  tagline: "From Database to Deployment"
+  colors:
+    primary: "#667eea"      # Purple (from ERD Manufacturer)
+    secondary: "#764ba2"    # Dark Purple (from ERD Category)
+    accent: "#f093fb"       # Pink (from ERD Part)
+    success: "#43e97b"      # Green (from ERD SupplierPart)
+    warning: "#fee140"      # Yellow (from ERD Inventory)
+    info: "#4facfe"         # Blue (from ERD Supplier)
+
+tone:
+  voice: "Professional, conversational, encouraging"
+  perspective: "Second person (you/your)"
+  formality: "Semi-formal - accessible but authoritative"
+  characteristics:
+    - "Clear and concise"
+    - "Encouraging without being condescending"
+    - "Practical and actionable"
+    - "Honest about complexity"
+    - "Enthusiastic about technology"
+
+writing_principles:
+  - name: "Clarity First"
+    description: "Always prioritize clear explanation over clever phrasing"
+    example: "Use 'data that doesn't change often' instead of 'immutable data structures'"
+
+  - name: "Show, Then Tell"
+    description: "Provide code examples before abstract explanations"
+    example: "Show a working tRPC procedure, then explain how it achieves type safety"
+
+  - name: "Progressive Disclosure"
+    description: "Introduce concepts incrementally, building on prior knowledge"
+    example: "Chapter 1 mentions tRPC; Chapter 5 explains it deeply"
+
+  - name: "Real-World Context"
+    description: "Always tie concepts to the Parts-Co business domain"
+    example: "Explain transactions using order processing, not abstract banking examples"
+
+  - name: "Acknowledge Difficulty"
+    description: "Be honest when topics are challenging, provide extra support"
+    example: "This concept is tricky at first. Let's break it down step by step."
+
+formatting:
+  headings:
+    h1: "Chapter title only (e.g., 'Chapter 5: API Architecture with tRPC')"
+    h2: "Major sections (e.g., 'Understanding tRPC')"
+    h3: "Subsections (e.g., 'Setting Up tRPC Router')"
+    h4: "Minor subdivisions (use sparingly)"
+    style: "Sentence case, not title case"
+    examples:
+      correct: "Setting up your development environment"
+      incorrect: "Setting Up Your Development Environment"
+
+  code_blocks:
+    language_tags: "Always specify (typescript, javascript, bash, sql, json, yaml)"
+    comments: "Abundant inline comments explaining non-obvious code"
+    length: "Keep under 30 lines; break longer examples into multiple blocks"
+    highlighting: "Use // [!code highlight] for key lines to emphasize"
+    style: "Consistent indentation (2 spaces for JS/TS, 4 for SQL)"
+
+  lists:
+    ordered: "Use for sequences (steps, instructions, rankings)"
+    unordered: "Use for collections (features, options, considerations)"
+    nesting: "Maximum 2 levels deep"
+    punctuation: "Capitalize first word; use periods only for complete sentences"
+
+  callout_boxes:
+    tip:
+      icon: "💡"
+      title: "Tip"
+      use: "Helpful shortcuts, best practices, pro tips"
+      example: "💡 **Tip:** Use Cmd+Shift+P in VS Code to access all commands quickly."
+
+    warning:
+      icon: "⚠️"
+      title: "Warning"
+      use: "Common mistakes, gotchas, things to avoid"
+      example: "⚠️ **Warning:** Don't commit your .env file to Git - it contains secrets!"
+
+    note:
+      icon: "📝"
+      title: "Note"
+      use: "Additional context, background information, related concepts"
+      example: "📝 **Note:** tRPC works best in monorepo setups where frontend and backend share code."
+
+    example:
+      icon: "💻"
+      title: "Example"
+      use: "Complete working examples demonstrating a concept"
+      example: "💻 **Example:** Here's how to create a type-safe query procedure:"
+
+    important:
+      icon: "🔴"
+      title: "Important"
+      use: "Critical information that must not be skipped"
+      example: "🔴 **Important:** You must restart your development server after changing environment variables."
+
+terminology:
+  preferred_terms:
+    # Use these consistently throughout all materials
+    backend: "backend (not back-end or back end)"
+    frontend: "frontend (not front-end or front end)"
+    fullstack: "full-stack (hyphenated)"
+    database: "database (not DB except in variable names)"
+    api: "API (uppercase)"
+    url: "URL (uppercase)"
+    json: "JSON (uppercase)"
+    typescript: "TypeScript (capital T and S)"
+    javascript: "JavaScript (capital J and S)"
+    postgresql: "PostgreSQL (not Postgres, except in informal contexts)"
+    nextjs: "Next.js (with period)"
+    trpc: "tRPC (lowercase t, uppercase RPC)"
+    oauth: "OAuth (capital O, lowercase a)"
+    env_file: ".env file (not 'dot env' or 'environment file')"
+
+  parts_co_domain:
+    # Consistent terminology for the business domain
+    entities:
+      - "Part (not Product)"
+      - "Manufacturer (not Vendor or Producer)"
+      - "Supplier (not Distributor)"
+      - "Warehouse (not Storage or Depot)"
+      - "Customer (not User when referring to buyers)"
+      - "Order (not Purchase or Transaction)"
+
+    relationships:
+      - "A Part is produced by one Manufacturer"
+      - "A Part can be supplied by multiple Suppliers"
+      - "An Order is placed by one Customer"
+      - "An Order ships from one Warehouse"
+
+code_style:
+  naming_conventions:
+    components: "PascalCase (e.g., PartsList, OrderDetails)"
+    functions: "camelCase (e.g., createOrder, calculateTotal)"
+    constants: "SCREAMING_SNAKE_CASE (e.g., MAX_ITEMS, API_URL)"
+    files: "kebab-case for files (e.g., parts-list.tsx, order-utils.ts)"
+    database_tables: "PascalCase singular (e.g., Part, Order, not parts, orders)"
+    database_columns: "camelCase (e.g., partNumber, createdAt)"
+
+  typescript:
+    prefer_interfaces: "For public APIs and component props"
+    prefer_types: "For unions, intersections, utility types"
+    explicit_returns: "Always type function return values"
+    no_any: "Never use 'any' - use 'unknown' if truly dynamic"
+
+  comments:
+    purpose: "Explain WHY, not WHAT (code should be self-documenting for WHAT)"
+    frequency: "Every 3-5 lines for complex logic; less for simple code"
+    style: "Complete sentences with proper punctuation"
+    examples:
+      good: "// Check inventory before allowing order - prevents overselling"
+      bad: "// Loop through items"
+
+powerpoint_standards:
+  slides_per_chapter: "30-50 slides"
+  structure:
+    - slide: 1
+      type: "Title Slide"
+      content: "Chapter number and title, Parts-Co logo placeholder"
+
+    - slide: 2
+      type: "Learning Objectives"
+      content: "3-5 bullet points, specific and measurable"
+
+    - slide: "3-5"
+      type: "Recap"
+      content: "Brief review of previous chapter concepts"
+
+    - slide: "6-40"
+      type: "Content Slides"
+      variations:
+        - "Concept introduction (text + diagram)"
+        - "Code example (syntax-highlighted)"
+        - "Architecture diagram"
+        - "Comparison table"
+        - "Step-by-step walkthrough"
+
+    - slide: "41-45"
+      type: "Exercise Preview"
+      content: "What students will build, expected outcome"
+
+    - slide: "46-48"
+      type: "Summary"
+      content: "Key takeaways (5-7 bullet points)"
+
+    - slide: "49"
+      type: "Quiz Preview"
+      content: "Sample questions to test understanding"
+
+    - slide: "50"
+      type: "Next Chapter"
+      content: "Preview of upcoming topics, how they build on this chapter"
+
+  visual_guidelines:
+    font_sizes:
+      title: "44pt"
+      heading: "32pt"
+      body: "18-20pt"
+      code: "14-16pt (monospace)"
+
+    colors:
+      background: "White or very light gray (#f9fafb)"
+      text: "Dark gray (#1f2937)"
+      code_background: "#f3f4f6"
+      accent: "Parts-Co purple (#667eea)"
+
+    layout:
+      margins: "Generous white space"
+      max_bullets: "5-7 per slide"
+      code_lines: "10-15 lines maximum per slide"
+      diagrams: "Simple, clear, labeled"
+
+book_chapter_standards:
+  length: "15-25 pages (approximately 5,000-8,000 words)"
+  structure:
+    - section: "Front Matter"
+      includes:
+        - "Chapter number and title"
+        - "Estimated time (e.g., '4-6 hours')"
+        - "Learning objectives (3-5 bullet points)"
+        - "Prerequisites (prior chapters, installed tools)"
+
+    - section: "Introduction"
+      length: "2-3 paragraphs (300-500 words)"
+      purpose: "Set context, explain why this topic matters, motivate learning"
+
+    - section: "Main Content"
+      subsections: "3-5 major sections"
+      each_includes:
+        - "Concept explanation (theory)"
+        - "Code example with comments"
+        - "Parts-Co business context"
+        - "Common pitfalls (warnings)"
+        - "Best practices (tips)"
+
+    - section: "Hands-On Exercise"
+      length: "2-4 pages"
+      includes:
+        - "What you'll build"
+        - "Step-by-step instructions (numbered)"
+        - "Code snippets with explanations"
+        - "Success criteria (how to verify it works)"
+        - "Troubleshooting (common errors)"
+
+    - section: "Summary"
+      length: "1 page"
+      includes:
+        - "Key takeaways (5-7 bullet points)"
+        - "Skills acquired"
+        - "How this fits into bigger picture"
+
+    - section: "What's Next"
+      length: "1 paragraph"
+      purpose: "Preview next chapter, show progression"
+
+    - section: "Further Reading"
+      includes:
+        - "Official documentation links (3-5)"
+        - "Recommended blog posts or tutorials (2-3)"
+        - "Related topics for deeper learning"
+
+  paragraph_style:
+    length: "3-5 sentences (100-150 words)"
+    opening: "Topic sentence stating main idea"
+    body: "Supporting details, examples, explanations"
+    closing: "Transition to next paragraph or summary statement"
+
+  code_integration:
+    frequency: "Code example every 1-2 pages"
+    context: "Always explain before showing code"
+    annotation: "Inline comments for non-obvious lines"
+    follow_up: "Explain what the code does after showing it"
+
+quiz_standards:
+  total_questions: "10-15 questions per chapter"
+  distribution:
+    multiple_choice: "60% (6-9 questions)"
+    true_false: "20% (2-3 questions)"
+    short_answer: "20% (2-3 questions)"
+
+  multiple_choice:
+    options: "4 options (a, b, c, d)"
+    correct_answers: "1 correct, 3 plausible distractors"
+    explanation: "Always provide explanation for correct answer"
+    example: |
+      What is tRPC primarily used for?
+      a) Database migrations
+      b) End-to-end type safety ✓
+      c) CSS styling
+      d) Image optimization
+
+      **Explanation:** tRPC provides type-safe communication between frontend and backend using TypeScript types without code generation.
+
+  true_false:
+    format: "Statement followed by True/False options"
+    explanation: "Explain why it's true or false"
+    example: |
+      True or False: TypeScript eliminates the need for runtime validation.
+
+      **Answer:** False ✓
+
+      **Explanation:** TypeScript validates at compile time, but runtime validation (e.g., with Zod) is still needed to protect against malicious input or external data sources.
+
+  short_answer:
+    format: "Open-ended question requiring 2-4 sentence answer"
+    rubric: "Provide model answer and key points to include"
+    example: |
+      Explain the difference between Server Components and Client Components in Next.js 14.
+
+      **Model Answer:**
+      Server Components render on the server and send HTML to the client, reducing JavaScript bundle size and improving performance. Client Components run in the browser and can use React hooks, event handlers, and browser APIs. Server Components are the default in the App Router, while Client Components require the 'use client' directive.
+
+qa_faq_standards:
+  total_questions: "10-15 questions per chapter"
+  categories:
+    conceptual: "30% - 'What is...?' 'Why do we use...?'"
+    practical: "40% - 'How do I...?' 'What's the best way to...?'"
+    troubleshooting: "20% - 'Why isn't my... working?' 'How do I fix...?'"
+    best_practices: "10% - 'Should I...?' 'When should I...?'"
+
+  answer_style:
+    length: "2-5 sentences (50-150 words)"
+    format: "Direct answer first, then explanation"
+    tone: "Helpful, not dismissive"
+    links: "Include relevant documentation links when applicable"
+
+  example_questions:
+    - q: "What's the difference between tRPC and REST APIs?"
+      a: "tRPC provides end-to-end type safety using TypeScript, while REST is a more general architectural style without built-in typing. With tRPC, you get autocomplete and type checking from backend to frontend without code generation. REST requires manual type definitions or OpenAPI schemas. For TypeScript full-stack apps, tRPC eliminates the need for separate API contracts."
+
+    - q: "How do I debug tRPC procedure errors?"
+      a: "Check the browser console for the full error message and stack trace. tRPC errors include context about which procedure failed. Verify your Zod input validation schema matches what you're sending. Use the Network tab to inspect the actual request payload. On the backend, add console.log statements in your procedure to trace execution. Enable verbose logging in your tRPC configuration for more details."
+
+    - q: "Should I use Server Components or Client Components for data fetching?"
+      a: "Prefer Server Components for initial data fetching - they fetch on the server, reducing client-side JavaScript and improving performance. Use Client Components when you need interactivity (forms, buttons) or browser APIs. You can compose both: fetch data in a Server Component and pass it as props to Client Components for interaction. This pattern is called 'server-first rendering.'"
+
+cross_references:
+  format: "Chapter number and section (e.g., 'See Chapter 3, Data Seeding')"
+  frequency: "2-3 cross-references per chapter"
+  direction:
+    backward: "Reference earlier chapters for foundational concepts"
+    forward: "Preview future chapters for advanced topics"
+
+  examples:
+    - "We set up PostgreSQL in Chapter 2 - if you skipped that section, go back now."
+    - "In Chapter 9, we'll use these tRPC fundamentals to build complex order processing."
+    - "Remember the normalization principles from the database course? We're applying them here."
+
+accessibility:
+  guidelines:
+    - "Use descriptive link text (not 'click here')"
+    - "Provide alt text for all diagrams in descriptions"
+    - "Ensure code examples are screen-reader friendly (avoid ASCII art)"
+    - "Use sufficient color contrast (4.5:1 minimum)"
+    - "Don't rely solely on color to convey meaning"
+    - "Provide text alternatives for visual information"
+
+inclusive_language:
+  pronouns: "Use gender-neutral 'they/their' for hypothetical developers"
+  examples:
+    - preferred: "When a developer encounters this error, they should..."
+    - avoid: "When a developer encounters this error, he should..."
+
+  assumptions:
+    - "Don't assume prior knowledge beyond stated prerequisites"
+    - "Define acronyms on first use in each chapter"
+    - "Explain context for cultural references (not everyone knows baseball terms)"
+    - "Use international examples (not US-centric measurements/dates)"
+
+quality_checklist:
+  before_generation:
+    - "Review chapter learning objectives from curriculum.json"
+    - "Check previous chapter context for continuity"
+    - "Verify technology stack versions from config"
+
+  after_generation:
+    - "All learning objectives addressed in content"
+    - "Code examples are complete and runnable"
+    - "Cross-references are accurate"
+    - "Terminology is consistent with style guide"
+    - "Formatting follows standards (headings, code blocks, callouts)"
+    - "No typos or grammatical errors"
+    - "Appropriate difficulty level for chapter position"
+    - "Exercises build on chapter content"
+    - "Quiz questions test understanding (not memorization)"
+    - "Q&A addresses likely student questions"

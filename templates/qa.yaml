@@ -1,0 +1,318 @@
+# Q&A / FAQ Template
+# ===================
+# Structure for generating 10-15 Q&A pairs per chapter
+
+metadata:
+  target_questions: "10-15 questions"
+  format: "Question and answer pairs"
+  purpose: "Address common student questions and provide practical guidance"
+
+distribution:
+  conceptual: "30% (3-5 questions) - 'What is...?' 'Why...?'"
+  practical: "40% (4-6 questions) - 'How do I...?'"
+  troubleshooting: "20% (2-3 questions) - 'Why isn't...working?'"
+  best_practices: "10% (1-2 questions) - 'Should I...?' 'When...?'"
+
+question_format:
+  structure: |
+    ### Q{N}: {Question in natural, conversational language}
+
+    **A:** {Direct answer first (1 sentence)}
+
+    {Detailed explanation (2-4 additional sentences)}
+
+    {Code example if applicable}
+
+    {Links to documentation or resources}
+
+  guidelines:
+    - "Write questions as students would ask them"
+    - "Answer directly and immediately"
+    - "Then provide context and detail"
+    - "Include code examples for 'How to' questions"
+    - "Link to relevant documentation"
+    - "2-5 sentences total per answer"
+
+categories:
+  conceptual:
+    purpose: "Explain fundamental concepts and theory"
+    example: |
+      ### Q1: What's the difference between tRPC and REST APIs?
+
+      **A:** tRPC provides end-to-end type safety using TypeScript types, while
+      REST is a more general architectural style without built-in typing.
+
+      With tRPC, your frontend automatically knows the exact input and output types
+      of every backend procedure, giving you autocomplete and compile-time type
+      checking. REST APIs require manual type definitions (like TypeScript interfaces)
+      or code generation from OpenAPI schemas. For TypeScript full-stack applications,
+      tRPC eliminates the gap between frontend and backend types entirely.
+
+      **See also:** [tRPC Documentation](https://trpc.io/docs)
+
+  practical:
+    purpose: "Provide step-by-step guidance for common tasks"
+    example: |
+      ### Q5: How do I add a new tRPC procedure to fetch parts by category?
+
+      **A:** Create a new query procedure in your `parts` router using Prisma to
+      filter by category.
+
+      ```typescript
+      export const partsRouter = router({
+        // ... existing procedures
+
+        getByCategory: publicProcedure
+          .input(z.object({ categoryId: z.number() }))
+          .query(async ({ input, ctx }) => {
+            return await ctx.prisma.part.findMany({
+              where: { categoryId: input.categoryId },
+              include: { manufacturer: true, category: true }
+            });
+          })
+      });
+      ```
+
+      This creates a type-safe procedure that your frontend can call with
+      `trpc.parts.getByCategory.useQuery({ categoryId: 1 })`. The input validation
+      with Zod ensures only valid category IDs are accepted.
+
+  troubleshooting:
+    purpose: "Help debug common errors and issues"
+    example: |
+      ### Q8: Why am I getting "Invalid input: Expected object, received undefined"?
+
+      **A:** This error occurs when you call a tRPC procedure without providing
+      required input parameters.
+
+      tRPC procedures with `.input()` validation expect an object, even if empty.
+      If your procedure has no input, call it with an empty object:
+      `trpc.parts.list.useQuery({})` not `trpc.parts.list.useQuery()`.
+
+      If your procedure does have inputs, ensure you're passing an object:
+      `trpc.parts.getById.useQuery({ id: 123 })` not
+      `trpc.parts.getById.useQuery(123)`.
+
+      Check your procedure definition for the exact input schema defined by Zod.
+
+  best_practices:
+    purpose: "Provide guidance on recommended approaches"
+    example: |
+      ### Q12: Should I use Server Components or Client Components for fetching parts data?
+
+      **A:** Use Server Components by default for initial data fetching.
+
+      Server Components fetch data on the server and send HTML to the client,
+      reducing JavaScript bundle size and improving performance. They're perfect
+      for displaying Parts-Co catalog data on initial page load. Use Client
+      Components only when you need interactivity (like an "Add to Cart" button)
+      or browser APIs (like localStorage for cart state). You can compose both:
+      fetch data in a Server Component and pass it as props to Client Components
+      for interaction.
+
+      This pattern is called "server-first rendering" and is the Next.js 14 best practice.
+
+answer_guidelines:
+  structure:
+    - "First sentence: Direct, actionable answer"
+    - "Following sentences: Context, explanation, rationale"
+    - "Code example: If applicable (40% of questions)"
+    - "External link: Documentation or resources (optional)"
+
+  tone:
+    - "Helpful and patient, never dismissive"
+    - "Assume good faith (student is trying to understand)"
+    - "Acknowledge when something is tricky"
+    - "Provide concrete next steps"
+
+  length:
+    - "Minimum: 2 sentences (very simple questions)"
+    - "Target: 3-5 sentences (most questions)"
+    - "Maximum: 7 sentences + code example (complex questions)"
+
+  code_examples:
+    when_to_include: "40% of questions should have code"
+    format: |
+      ```{language}
+      {complete_working_example}
+      ```
+
+      {Explanation of what code does}
+
+    guidelines:
+      - "Show complete, working code"
+      - "Keep under 15 lines"
+      - "Include comments for complex logic"
+      - "Use realistic Parts-Co examples"
+
+parts_co_integration:
+  percentage: "60% of questions should reference Parts-Co domain"
+  approach: "Ground abstract concepts in concrete auto parts scenarios"
+
+  examples:
+    - "How do I prevent customers from ordering out-of-stock parts?"
+    - "What's the best way to display parts with multiple supplier prices?"
+    - "Should I store cart data in the database or localStorage?"
+    - "How do I handle simultaneous orders depleting the same inventory?"
+
+  realistic_context: |
+    ### Q7: How do I prevent customers from ordering more parts than we have in stock?
+
+    **A:** Validate inventory in your `addToCart` tRPC procedure before allowing
+    the addition.
+
+    ```typescript
+    addToCart: protectedProcedure
+      .input(z.object({ partId: z.number(), quantity: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        // Check available inventory
+        const inventory = await ctx.prisma.inventory.aggregate({
+          where: { partId: input.partId },
+          _sum: { quantityOnHand: true }
+        });
+
+        const available = inventory._sum.quantityOnHand || 0;
+
+        if (input.quantity > available) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: `Only ${available} units available`
+          });
+        }
+
+        // Proceed with adding to cart...
+      })
+    ```
+
+    This ensures users can't add unavailable quantities. Display the error message
+    in your UI to inform the customer of stock limitations.
+
+common_topics:
+  chapter_specific:
+    - "How do I {perform_key_task_from_chapter}?"
+    - "What's the difference between {concept_a} and {concept_b}?"
+    - "Why isn't my {feature} working?"
+    - "Do I need to {optional_step}?"
+    - "Can I use {alternative_technology} instead?"
+
+  cross_chapter:
+    - "How does this relate to what we learned in Chapter {N}?"
+    - "Do I need to understand {previous_topic} before this?"
+    - "Will we cover {related_topic} later?"
+
+  debugging:
+    - "Why am I getting {common_error}?"
+    - "My {feature} works in development but not production. Why?"
+    - "How do I debug {problem}?"
+
+  deployment:
+    - "Will this work on {platform}?"
+    - "Do I need to {deployment_step}?"
+    - "How much will this cost in production?"
+
+linking_strategy:
+  internal_links:
+    format: "See Chapter {N}: {Section Name}"
+    when: "Reference concepts from other chapters"
+
+  external_links:
+    include:
+      - "Official documentation (primary source)"
+      - "Error-specific documentation pages"
+      - "Community resources (Stack Overflow, GitHub issues)"
+
+    format: "[{Link Text}]({URL})"
+
+    example: |
+      **See also:**
+      - [tRPC Error Handling](https://trpc.io/docs/error-handling)
+      - [Next.js Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+
+quality_checklist:
+  questions:
+    - "Is the question phrased naturally (as student would ask)?"
+    - "Does it address a realistic concern?"
+    - "Is it specific to this chapter's content?"
+
+  answers:
+    - "Direct answer in first sentence?"
+    - "Provides sufficient context and explanation?"
+    - "Includes code example if applicable?"
+    - "Tone is helpful and encouraging?"
+    - "Length appropriate (2-5 sentences)?"
+    - "Links to relevant resources?"
+
+output_structure: |
+  # Chapter {N} Q&A: {Chapter Title}
+
+  Common questions and answers about {chapter_topic}.
+
+  ---
+
+  ## Conceptual Questions
+
+  ### Q1: {Question}
+
+  **A:** {Answer with explanation}
+
+  ---
+
+  ### Q2: {Question}
+
+  **A:** {Answer with explanation}
+
+  ---
+
+  ## Practical Questions
+
+  ### Q3: {Question}
+
+  **A:** {Answer}
+
+  ```{language}
+  {code_example}
+  ```
+
+  {Explanation}
+
+  ---
+
+  (Continue for all questions organized by category...)
+
+  ---
+
+  ## Troubleshooting
+
+  ### Q{N}: {Question}
+
+  **A:** {Answer with debugging steps}
+
+  ---
+
+  ## Best Practices
+
+  ### Q{N}: {Question}
+
+  **A:** {Answer with recommendation}
+
+  ---
+
+  ## Additional Resources
+
+  - [Resource 1](url)
+  - [Resource 2](url)
+
+avoidance:
+  avoid:
+    - "Questions with yes/no answers (expand to 'Should I...')"
+    - "Overly technical jargon without explanation"
+    - "Dismissive tone ('This is obvious', 'Just read the docs')"
+    - "Extremely niche edge cases"
+    - "Questions unrelated to chapter content"
+
+  prefer:
+    - "Questions students actually ask"
+    - "Practical, actionable guidance"
+    - "Patient, thorough explanations"
+    - "Real-world Parts-Co scenarios"
+    - "Links to documentation for deeper learning"
