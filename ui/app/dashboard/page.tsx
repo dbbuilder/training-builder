@@ -60,6 +60,9 @@ interface Project {
   status: ProjectStatus;
   name: string;
   description?: string;
+  model?: string;
+  chapters?: any[];
+  updatedAt: string | Date;
 }
 
 function ProjectCard({
