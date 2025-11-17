@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd ui && npm install && npm run build",
+  "devCommand": "cd ui && npm run dev",
+  "outputDirectory": "ui/.next"
+}
