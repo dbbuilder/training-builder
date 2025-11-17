@@ -53,21 +53,30 @@ export default function DashboardPage() {
   );
 }
 
+type ProjectStatus = 'draft' | 'generating' | 'completed' | 'error';
+
+interface Project {
+  id: string;
+  status: ProjectStatus;
+  name: string;
+  description?: string;
+}
+
 function ProjectCard({
   project,
   onDelete,
 }: {
-  project: any;
+  project: Project;
   onDelete: () => void;
 }) {
-  const statusColors = {
+  const statusColors: Record<ProjectStatus, string> = {
     draft: 'bg-gray-100 text-gray-700',
     generating: 'bg-blue-100 text-blue-700',
     completed: 'bg-green-100 text-green-700',
     error: 'bg-red-100 text-red-700',
   };
 
-  const statusIcons = {
+  const statusIcons: Record<ProjectStatus, string> = {
     draft: '📝',
     generating: '⚙️',
     completed: '✅',
