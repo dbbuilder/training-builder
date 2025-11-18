@@ -9,25 +9,43 @@ export default function Home() {
             Training Builder
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Generate comprehensive training courses with AI. Bring your own API key and choose between Claude, GPT-4, or Gemini.
+            Generate comprehensive training courses with AI. Create book chapters, exercises, quizzes, instructor materials, and PowerPoint presentations - all from a single outline.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
           <FeatureCard
             icon="📝"
-            title="Multi-Stage Outline"
-            description="Create and refine your course outline with an intuitive editor powered by Monaco"
+            title="7 Document Types"
+            description="Book chapters, exercises, instructor keys, quizzes, Q&A, topic summaries, and PowerPoint slides"
           />
           <FeatureCard
             icon="🤖"
             title="AI Generation"
-            description="Generate chapters, exercises, quizzes, and instructor materials with state-of-the-art AI"
+            description="Generate complete curricula with Claude, GPT-4, or Gemini using your own API keys"
           />
           <FeatureCard
-            icon="📦"
-            title="Export & Preview"
-            description="Preview your content in real-time and export to multiple formats including zip archives"
+            icon="📄"
+            title="PDF Pipeline"
+            description="Export to PDF with chapter-based page numbers, cover pages, and merged course books"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+          <FeatureCard
+            icon="🎨"
+            title="Professional Formatting"
+            description="Automatic APA title case, GitHub admonitions, syntax highlighting, and consistent styling"
+          />
+          <FeatureCard
+            icon="📊"
+            title="PowerPoint Export"
+            description="Generate presentations with modern Tailwind-inspired designs and sub-bullet support"
+          />
+          <FeatureCard
+            icon="✅"
+            title="Style Guide"
+            description="Built-in style guide synthesizing best practices from Google, GitHub, and industry standards"
           />
         </div>
 
@@ -61,6 +79,21 @@ export default function Home() {
             className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-colors"
           >
             View Documentation
+          </Link>
+        </div>
+
+        <div className="flex gap-4 justify-center mt-4">
+          <Link
+            href="/style-guide"
+            className="px-6 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            Style Guide
+          </Link>
+          <Link
+            href="/credits"
+            className="px-6 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            Credits & Licenses
           </Link>
         </div>
 
